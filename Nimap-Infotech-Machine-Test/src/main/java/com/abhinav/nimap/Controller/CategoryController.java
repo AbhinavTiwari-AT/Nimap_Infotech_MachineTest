@@ -25,13 +25,15 @@ public class CategoryController {
 	@Autowired
 	private CategoryServices categoryServices;
 	
+	
+	//create
 	@PostMapping("/")
 	public ResponseEntity<CategoryDto>createCategory(@RequestBody CategoryDto categoryDto)
 	{
-		   CategoryDto create =this.categoryServices.createCategory(categoryDto);
-		   return new ResponseEntity<CategoryDto>(create,HttpStatus.CREATED);
+	  CategoryDto create =this.categoryServices.createCategory(categoryDto);
+	  return new ResponseEntity<CategoryDto>(create,HttpStatus.CREATED);
 
-		}
+	}
 	
 	   //Update
 	@PutMapping("/{categoryId}")
@@ -39,8 +41,8 @@ public class CategoryController {
 	{
 		
 	 CategoryDto updated =this.categoryServices.updateCategory(categoryDto,categoryId);
-	 
 	 return new ResponseEntity<CategoryDto>(updated,HttpStatus.OK);
+	 
 	}
 	
 
@@ -48,32 +50,33 @@ public class CategoryController {
 	@DeleteMapping("/{categoryId}")
 	public String deleteCategory(@PathVariable Integer categoryId)
 	{
-	    this.categoryServices.deleteCategory(categoryId); 
-	    return "deleted";
+	  this.categoryServices.deleteCategory(categoryId); 
+	  return "deleted";
 	}
 
 	
 	
 	
-	  // get 
+	// get 
 	@GetMapping("/{categoryId}")
 	public  ResponseEntity<CategoryDto> getCategory(@PathVariable Integer categoryId)
 	{
-		  CategoryDto get = this.categoryServices.getCategory(categoryId);
-	      return new ResponseEntity<CategoryDto>(get,HttpStatus.OK);
+	   CategoryDto get = this.categoryServices.getCategory(categoryId);
+	   return new ResponseEntity<CategoryDto>(get,HttpStatus.OK);
 		            
 	}
 
-	  // get all
+	// get all
 	@GetMapping("")
 	public ResponseEntity<List<CategoryDto>> getCategories(
 			@RequestParam(value = "pageNumber",defaultValue = "1",required = false) Integer pageNumber,
-			@RequestParam(value = "pageSize",defaultValue = "5",required = false) Integer pageSize
+			@RequestParam(value = "pageSize",defaultValue = "2",required = false) Integer pageSize
 			)
 	{
-		 pageNumber = pageNumber - 1;
-		List<CategoryDto> getAll = this.categoryServices.getCategories(pageNumber,pageSize);
-           return ResponseEntity.ok(getAll);
+	  pageNumber = pageNumber - 1;
+	  List<CategoryDto> getAll = this.categoryServices.getCategories(pageNumber,pageSize);
+      return ResponseEntity.ok(getAll);
+      
 	}
 
 

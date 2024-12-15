@@ -28,37 +28,45 @@ public class ProductServiceImpl implements ProductServices {
 	private ProductRepo productRepo;
 	
 	@Autowired
-    private CategoryRepo categoryRepo;
-
+	private CategoryRepo categoryRepo;
+	
+	
+    // create product
 	@Override
-	public ProductDto createProduct(ProductDto productDto) {
+	public ProductDto createProduct(ProductDto productDto,Integer categoryId) {
 		
-		Product product = this.modelMapper.map(productDto, Product.class);
-		Product savedProduct = this.productRepo.save(product);
-		return this.modelMapper.map(savedProduct,ProductDto.class);
+		   Category category = categoryRepo.findById(productDto.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
+		   Product product = this.modelMapper.map(productDto, Product.class);
+		   product.setName(productDto.getName());
+		   product.setPrice(productDto.getPrice());
+		   product.setCategory(category);
+		   Product savedProduct = this.productRepo.save(product);
+		   return this.modelMapper.map(savedProduct,ProductDto.class);
+		 
 	}
 
+	//update product
 	@Override
-	public ProductDto updateProduct(ProductDto productDto, Integer productId) {
-		
-		Product product = this.productRepo.findById(productId).orElseThrow(()-> new ResourceNotFoundException("Product","productId",productId));
-		product.setProductName(productDto.getProductName());
-        product.setPrice(productDto.getPrice());
-      //  product.setCategory(productDto.getCategory());
+	public ProductDto updateProduct(ProductDto productDto, Integer productId,Integer categoryId) {
+
+		Product product = this.productRepo.findById(productId).orElseThrow(()-> new  ResourceNotFoundException("Product","productId",productId));
+		Category category = this.categoryRepo.findById(productDto.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId",categoryId));
+	    product.setCategory(category);
+		product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());        
         Product updatedProduct = this.productRepo.save(product);
-        return this.modelMapper.map(updatedProduct,ProductDto.class); 		
-		
+        return this.modelMapper.map(updatedProduct,ProductDto.class);  
 	}
-
+	
+    //get product by id 
 	@Override
 	public ProductDto getProductById(Integer productId) {
 		
-
-		Product product = this.productRepo.findById(productId).orElseThrow(()-> new ResourceNotFoundException("Product","productId",productId));
-		return this.modelMapper.map(product,ProductDto.class);
-
+		 Product product = this.productRepo.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+		 return this.modelMapper.map(product, ProductDto.class);
 	}
 
+	//get all product
 	@Override
 	public List<ProductDto> getAllProduct(Integer pageNumber, Integer pageSize) {
 		
@@ -74,7 +82,8 @@ public class ProductServiceImpl implements ProductServices {
 		return productDtos;
 		
 	}
-
+ 
+	// delete product
 	@Override
 	public void deleteProduct(Integer productId) {
 		

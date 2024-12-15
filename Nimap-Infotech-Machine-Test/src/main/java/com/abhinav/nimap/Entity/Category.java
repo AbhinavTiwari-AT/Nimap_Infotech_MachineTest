@@ -1,9 +1,8 @@
 package com.abhinav.nimap.Entity;
 
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,9 +28,11 @@ public class Category {
 	
 	private String categoryType;
 	
-//	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-//	private List<Product> product = new ArrayList<>();
+	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+	private List<Product> product = new ArrayList<>();
 	
+	
+
 	
 	
 	

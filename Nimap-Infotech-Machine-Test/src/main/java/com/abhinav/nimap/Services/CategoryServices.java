@@ -7,7 +7,7 @@ import com.abhinav.nimap.Dto.CategoryDto;
 
 public interface CategoryServices {
 	
-	 //create
+	//create
 	public CategoryDto createCategory(CategoryDto categoryDto);
 	
 	//update

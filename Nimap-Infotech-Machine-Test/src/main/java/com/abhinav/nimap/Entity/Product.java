@@ -1,6 +1,5 @@
 package com.abhinav.nimap.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,14 +23,12 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
 	
-	private String  productName;
+	private String name;
 	
 	private float price;
-	
-//	private Integer categoryId;
-	
-//	@ManyToOne
-//	@JoinColumn(name = "category_id",nullable = false)
-//	private Category category;
+		
+	@ManyToOne
+	@JoinColumn(name = "category_id", nullable = false)
+	private Category category;
 
 }

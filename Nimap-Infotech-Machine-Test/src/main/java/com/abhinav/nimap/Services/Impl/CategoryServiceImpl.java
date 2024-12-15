@@ -31,7 +31,6 @@ public class CategoryServiceImpl implements CategoryServices {
 
 		Category category = this.modelMapper.map(categoryDto,Category.class);
 		Category added = this.categoryRepo.save(category);
-		
 		return this.modelMapper.map(added, CategoryDto.class);
 		
 	}
@@ -40,11 +39,10 @@ public class CategoryServiceImpl implements CategoryServices {
 	@Override
 	public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
 		
-		 Category cate = this.categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","categoryId",categoryId));
-			
-			cate.setCategoryType(categoryDto.getCategoryType());			
-			Category updateCate = this.categoryRepo.save(cate);
-			return this.modelMapper.map(updateCate,CategoryDto.class);
+		 Category category = this.categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","categoryId",categoryId));
+		 category.setCategoryType(categoryDto.getCategoryType());			
+		 Category updateCate = this.categoryRepo.save(category);
+		 return this.modelMapper.map(updateCate,CategoryDto.class);
 		
 	}
 
@@ -52,8 +50,8 @@ public class CategoryServiceImpl implements CategoryServices {
 	@Override
 	public void deleteCategory(Integer categoryId) {
 		
-		Category cate = this.categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
-	    this.categoryRepo.delete(cate);
+		Category category = this.categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
+	    this.categoryRepo.delete(category);
 		
 	}
     
@@ -61,8 +59,8 @@ public class CategoryServiceImpl implements CategoryServices {
 	@Override
 	public CategoryDto getCategory(Integer categoryId) {
 		
-		Category cate = this.categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","categoryId",categoryId));
-		return this.modelMapper.map(cate,CategoryDto.class);
+		Category category = this.categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","categoryId",categoryId));
+		return this.modelMapper.map(category,CategoryDto.class);
 	}
 
 	// get all Category

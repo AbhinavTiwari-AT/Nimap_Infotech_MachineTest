@@ -7,10 +7,10 @@ import com.abhinav.nimap.Dto.ProductDto;
 public interface ProductServices {
 	
 	 // create
-	 ProductDto createProduct(ProductDto productDto);
+	 ProductDto createProduct(ProductDto productDto,Integer categoryId);
 	  
 	 //update
-	 ProductDto updateProduct(ProductDto productDto,Integer productId);
+	 ProductDto updateProduct(ProductDto productDto,Integer productId,Integer categoryId);
 	  
 	 //get by id
 	 ProductDto getProductById(Integer productId);

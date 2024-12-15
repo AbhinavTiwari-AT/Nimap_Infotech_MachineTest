@@ -1,6 +1,5 @@
 package com.abhinav.nimap.Dto;
 
-import com.abhinav.nimap.Entity.Category;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +12,13 @@ public class ProductDto {
 	
     private int productId;
 	
-	private String  productName;
+	private String  name;
 	
 	private float price;
+
+	private int categoryId;
+
+	private CategoryDto category;
 	
-	//private int categoryId;
 
 }
